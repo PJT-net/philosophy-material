@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>唯物主义与唯心主义 互动学习页</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Microsoft Yahei",sans-serif;}
+body{background:#f4f7fb;padding:16px;color:#222;line-height:1.65;}
+.container{max-width:1100px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:8px;font-size:1.8rem;}
+.subtitle{text-align:center;color:#555;margin-bottom:24px;}
+.block-title{font-size:1.4rem;padding:12px 16px;border-radius:10px;margin:20px 0 12px;}
+.material-title{background-color:#d9edf7;color:#204b70;}
+.ideal-title{background-color:#fce4ec;color:#882c42;}
+.card-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:24px;}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px #0000001a;overflow:hidden;}
+.card-head{padding:14px 18px;font-weight:bold;font-size:1.1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+.card-head.mat{background:#e8f4fc;color:#1c5480;}
+.card-head.id{background:#f8e8ee;color:#7b2844;}
+.card-body{padding:0 18px;height:0;overflow:hidden;transition:all 0.35s ease;}
+.card-body.open{padding:16px 18px;height:auto;}
+.icon-tag{font-size:1.4rem;}
+.portrait{width:100%;max-width:170px;height:auto;border-radius:8px;display:inline-block;vertical-align:top;margin:6px 6px 12px;box-shadow:0 2px 6px #00000022;}
+.diff-panel{background:#fffdf0;border:1px solid #f0e6bc;border-radius:12px;padding:20px;margin:24px 0;}
+.diff-panel h3{margin-bottom:10px;color:#b07800;}
+.contrast-box{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+.contrast-col{padding:14px;border-radius:8px;}
+.col-mat{background:#e8f4fc;}
+.col-id{background:#f8e8ee;}
+.quiz-box{background:#edf2f9;padding:20px;border-radius:12px;margin-top:28px;}
+.q-item{margin-bottom:14px;}
+.opt{padding:8px 12px;background:#fff;border-radius:6px;margin:6px 0;cursor:pointer;border:1px solid #dde2e9;}
+.opt:hover{background:#eef2f8;}
+.right{background:#d4edda;border-color:#b2d8bc;}
+.wrong{background:#f8d7da;border-color:#e8b3b8;}
+.tip{margin-top:8px;color:#444;font-size:0.94rem;}
+@media(max-width:640px){
+.contrast-box{grid-template-columns:1fr;}
+h1{font-size:1.4rem;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>唯物主义 vs 唯心主义</h1>
+<div class="subtitle">哲学两大基本派别｜五大形态 概念·代表观点·区别</div>
+
+<div class="block-title material-title">🔵 唯物主义：物质第一性，意识第二性</div>
+<div class="card-wrap">
+<!--古代朴素唯物主义-->
+<div class="card">
+<div class="card-head mat" onclick="toggleCard(this)">
+<span>古代朴素唯物主义</span>
+<span class="icon-tag">＋</span>
+</div>
+<div class="card-body">
+<img class="portrait" src="https://aka.doubaocdn.com/s/34aQWnVlUQ" alt="赫拉克利特画像">
+<p><strong>核心：</strong>世界本原是某一种/几种具体物质。直观猜测，缺少科学论证。</p>
+<p><strong>代表观点：</strong></p>
+<ul style="padding-left:20px;margin:8px 0;">
+<li>中国五行：金、木、水、火、土构成万物</li>
+<li>赫拉克利特：火是万物本原</li>
+<li>泰勒斯：水是万物的本原</li>
+</ul>
+<p><strong>局限：</strong>朴素直观；把世界等同于具体实物。</p>
+</div>
+</div>
+
+<!--近代形而上学（机械）唯物主义-->
+<div class="card">
+<div class="card-head mat" onclick="toggleCard(this)">
+<span>近代机械唯物主义（形而上学）</span>
+<span class="icon-tag">＋</span>
+</div>
+<div class="card-body">
+<img class="portrait" src="https://aka.doubaocdn.com/s/x7352lIQHu" alt="费尔巴哈画像">
+<p><strong>核心：</strong>世界本原是原子；利用近代自然科学，但用机械力学看待一切事物。</p>
+<p><strong>代表：</strong>拉美特利、霍尔巴赫、费尔巴哈</p>
+<p><strong>代表观点：</strong></p>
+<ul style="padding-left:20px;margin:8px 0;">
+<li>人就是机器，一切运动都是机械运动</li>
+<li>原子属性＝物质全部属性</li>
+</ul>
+<p><strong>局限：</strong>机械性；形而上学（孤立静止片面）；历史观仍然唯心。</p>
+</div>
+</div>
+
+<!--辩证唯物主义-->
+<div class="card">
+<div class="card-head mat" onclick="toggleCard(this)">
+<span>辩证唯物主义（马克思主义）</span>
+<span class="icon-tag">＋</span>
+</div>
+<div class="card-body">
+<img class="portrait" src="https://aka.doubaocdn.com/s/hbh0uAWocG" alt="卡尔·马克思画像">
+<p><strong>核心：</strong>物质是不依赖于人的意识、并能为人意识所反映的客观实在；物质决定意识，意识反作用于物质；用联系、发展、矛盾看世界。</p>
+<p><strong>代表：</strong>马克思、恩格斯、列宁</p>
+<p><strong>要点：</strong></p>
+<ul style="padding-left:20px;margin:8px 0;">
+<li>世界统一于物质</li>
+<li>对立统一、质量互变、否定之否定三大规律</li>
+<li>实践是认识的来源</li>
+</ul>
+<p><strong>特点：</strong>唯物主义+辩证法；唯物史观（历史唯物主义）。</p>
+</div>
+</div>
+</div>
+
+<div class="block-title ideal-title">🔴 唯心主义：意识第一性，物质第二性</div>
+<div class="card-wrap">
+<!--主观唯心-->
+<div class="card">
+<div class="card-head id" onclick="toggleCard(this)">
+<span>主观唯心主义</span>
+<span class="icon-tag">＋</span>
+</div>
+<div class="card-body">
+<img class="portrait" src="https://aka.doubaocdn.com/s/RvbExDmTSJ" alt="王阳明画像">
+<img class="portrait" src="https://aka.doubaocdn.com/s/F63QXU0Kv7" alt="贝克莱画像">
+<img class="portrait" src="https://aka.doubaocdn.com/s/YhzYiUntpV" alt="笛卡尔画像">
+<img class="portrait" src="https://aka.doubaocdn.com/s/VsxpFgZ48y" alt="孟子画像">
+<p><strong>核心：</strong>把<strong>人的主观精神</strong>当作世界本原：人的感觉、心灵、意志、心。</p>
+<p><strong>代表观点：</strong></p>
+<ul style="padding-left:20px;margin:8px 0;">
+<li>王阳明：心外无物，心外无理</li>
+<li>贝克莱：存在就是被感知</li>
+<li>孟子：万物皆备于我</li>
+<li>笛卡尔：我思故我在</li>
+</ul>
+<p>简单记：<strong>万事万物由“我”的心/感觉决定</strong>。</p>
+</div>
+</div>
+
+<!--客观唯心-->
+<div class="card">
+<div class="card-head id" onclick="toggleCard(this)">
+<span>客观唯心主义</span>
+<span class="icon-tag">＋</span>
+</div>
+<div class="card-body">
+<img class="portrait" src="https://aka.doubaocdn.com/s/ApnagdQSxp" alt="柏拉图画像">
+<img class="portrait" src="https://aka.doubaocdn.com/s/EwapLAqRNg" alt="朱熹画像">
+<img class="portrait" src="https://aka.doubaocdn.com/s/gyiYA6K6xL" alt="黑格尔画像">
+<p><strong>核心：</strong>在人之外，存在一个<strong>客观精神</strong>作为世界本原，独立于人。</p>
+<p><strong>代表观点：</strong></p>
+<ul style="padding-left:20px;margin:8px 0;">
+<li>柏拉图：理念世界；现实只是理念影子</li>
+<li>黑格尔：绝对精神主宰世界</li>
+<li>朱熹：理在事先；理生万物</li>
+<li>宗教：上帝、神创世</li>
+</ul>
+<p>简单记：<strong>人以外的神秘精神本体（理 / 绝对精神 / 神）创造世界</strong>。</p>
+</div>
+</div>
+</div>
+
+<div class="diff-panel">
+<h3>📊 根本区别总览：哲学基本问题 — 思维与存在何者为本原</h3>
+<div class="contrast-box">
+<div class="contrast-col col-mat">
+<strong>✅ 唯物主义</strong>
+<p>本原：<strong>物质</strong></p>
+<p>物质先存在；意识是物质的产物。</p>
+<p>分支：古代朴素｜近代机械｜辩证唯物主义</p>
+</div>
+<div class="contrast-col col-id">
+<strong>❌ 唯心主义</strong>
+<p>本原：<strong>意识（精神）</strong></p>
+<p>意识先存在；物质来自精神。</p>
+<p>分支：主观唯心（我之心）｜客观唯心（外在精神）</p>
+</div>
+</div>
+<div style="margin-top:14px;">
+<p><strong>快速区分口诀：</strong></p>
+<ul style="padding-left:22px;margin-top:6px;">
+<li>朴素唯物：具体实物（水火金木土）</li>
+<li>机械唯物：原子、机械看待一切</li>
+<li>辩证唯物：客观物质 + 辩证法矛盾发展</li>
+<li>主观唯心：我、心、感觉、我的精神</li>
+<li>客观唯心：理、绝对精神、上帝、神（人之外）</li>
+</ul>
+</div>
+</div>
+
+<div class="quiz-box">
+<h3>🧩 互动小练习（点击选项判断派别）</h3>
+<div class="q-item">
+<p>题目1：“心外无物”属于？</p>
+<div class="opt" data-ans="wrong">客观唯心主义</div>
+<div class="opt" data-ans="right">主观唯心主义</div>
+<div class="opt" data-ans="wrong">古代朴素唯物主义</div>
+<div class="tip" id="q1tip"></div>
+</div>
+<div class="q-item">
+<p>题目2：“理生万物，理在事先”属于？</p>
+<div class="opt" data-ans="right">客观唯心主义</div>
+<div class="opt" data-ans="wrong">主观唯心主义</div>
+<div class="opt" data-ans="wrong">辩证唯物主义</div>
+<div class="tip" id="q2tip"></div>
+</div>
+<div class="q-item">
+<p>题目3：世界本原是火，这是？</p>
+<div class="opt" data-ans="right">古代朴素唯物主义</div>
+<div class="opt" data-ans="wrong">近代机械唯物主义</div>
+<div class="opt" data-ans="wrong">客观唯心主义</div>
+<div class="tip" id="q3tip"></div>
+</div>
+</div>
+
+</div>
+
+<script>
+function toggleCard(el){
+let body = el.nextElementSibling;
+let icon = el.querySelector(".icon-tag");
+body.classList.toggle("open");
+icon.innerText = body.classList.contains("open") ? "－" : "＋";
+}
+
+const tipsText = {
+q1:{right:"正确！王阳明心外无物，以人的内心为本原，主观唯心主义。",wrong:"不对，提示：这句话强调人的内心。"},
+q2:{right:"正确！朱熹的理，是人之外的客观精神，客观唯心主义。",wrong:"不对，提示：理是独立于人之外的精神。"},
+q3:{right:"正确！火是具体物质形态，古代朴素唯物主义。",wrong:"不对，提示：火是具体实物，古代朴素唯物。"}
+};
+
+document.querySelectorAll(".quiz-box .opt").forEach(opt=>{
+opt.onclick=function(){
+let qWrap=this.closest(".q-item");
+let qIdx = [...qWrap.parentElement.children].indexOf(qWrap);
+let qid=["q1","q2","q3"][qIdx];
+let tipDom = document.getElementById(qid+"tip");
+qWrap.querySelectorAll(".opt").forEach(o=>o.classList.remove("right","wrong"));
+if(this.dataset.ans==="right"){
+this.classList.add("right");
+tipDom.innerText = tipsText[qid].right;
+}else{
+this.classList.add("wrong");
+tipDom.innerText = tipsText[qid].wrong;
+}
+}
+})
+</script>
+</body>
+</html>
