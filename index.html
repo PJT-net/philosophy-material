@@ -7,51 +7,34 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:"Microsoft Yahei",sans-serif;}
 body{background:#f4f7fb;padding:16px;color:#222;line-height:1.65;}
-.container{max-width:1100px;margin:0 auto;}
+.container{max-width:1200px;margin:0 auto;}
 h1{text-align:center;color:#2c3e50;margin-bottom:8px;font-size:1.8rem;}
 .subtitle{text-align:center;color:#555;margin-bottom:24px;}
-
-.block-title{font-size:1.4rem;padding:12px 16px;border-radius:10px;margin:24px 0 12px;}
-.material-title{background-color:#d9edf7;color:#204b70;}
+.section-title{font-size:1.4rem;padding:12px 16px;border-radius:10px;margin:20px 0 12px;display:flex;align-items:center;gap:8px;}
+.mat-title{background-color:#d9edf7;color:#204b70;}
 .ideal-title{background-color:#fce4ec;color:#882c42;}
+.card-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-bottom:24px;}
+.party-card{background:#fff;border-radius:12px;box-shadow:0 2px 8px #0000001a;overflow:hidden;}
+.card-header{padding:14px 18px;font-weight:bold;font-size:1.1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+.card-header.mat{background:#e8f4fc;color:#1c5480;}
+.card-header.ideal{background:#f8e8ee;color:#7b2844;}
+.card-body{padding:0 18px;display:none;}
+.card-body.open{padding:18px;display:block;}
+/* 单个人物条目样式，一人一条 */
+.philosopher-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #eee;}
+.philosopher-item:last-child{border-bottom:none;}
+.avatar{width:110px;height:auto;border-radius:8px;box-shadow:0 1px 4px #0002;}
+.quote-box{flex:1;}
+.quote-name{font-weight:bold;font-size:1.05rem;margin-bottom:4px;}
+.quote-sentence{color:#333;font-style:italic;}
+.desc-text{margin:12px 0 16px;color:#444;}
 
-/* ===== 派别折叠卡片 ===== */
-.sec-card{background:#fff;border-radius:12px;box-shadow:0 2px 8px #0000001a;margin-bottom:14px;overflow:hidden;}
-.sec-head{padding:14px 18px;font-weight:bold;font-size:1.1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
-.sec-head.mat{background:#e8f4fc;color:#1c5480;}
-.sec-head.id{background:#f8e8ee;color:#7b2844;}
-.sec-body{display:none;padding:16px 18px;}
-.sec-body.open{display:block;}
-.icon-tag{font-size:1.4rem;line-height:1;}
-
-/* ===== 派别简介 ===== */
-.sec-intro{margin-bottom:12px;color:#444;}
-.sec-intro strong{color:#222;}
-
-/* ===== 每个人物一条卡片（头像+名字+原话）===== */
-.person{
-display:flex;align-items:center;gap:14px;
-background:#fafbfd;border:1px solid #e7ebf1;border-radius:10px;
-padding:10px 14px;margin:8px 0;
-}
-.person img{width:64px;height:64px;border-radius:8px;object-fit:cover;flex:none;box-shadow:0 1px 4px #0000001a;background:#eee;}
-.person .p-info{flex:1;}
-.person .p-name{font-weight:bold;font-size:1.05rem;color:#2c3e50;}
-.person .p-tag{font-size:0.8rem;color:#888;display:block;margin-bottom:3px;}
-.person .p-quote{color:#333;font-size:0.95rem;}
-.person .p-quote::before{content:"“";color:#c41e3a;}
-.person .p-quote::after{content:"”";color:#c41e3a;}
-
-/* ===== 对比面板 ===== */
 .diff-panel{background:#fffdf0;border:1px solid #f0e6bc;border-radius:12px;padding:20px;margin:24px 0;}
 .diff-panel h3{margin-bottom:10px;color:#b07800;}
 .contrast-box{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
 .contrast-col{padding:14px;border-radius:8px;}
 .col-mat{background:#e8f4fc;}
-.col-id{background:#f8e8ee;}
-.diff-list{padding-left:22px;margin-top:6px;}
-
-/* ===== 小练习 ===== */
+.col-ideal{background:#f8e8ee;}
 .quiz-box{background:#edf2f9;padding:20px;border-radius:12px;margin-top:28px;}
 .q-item{margin-bottom:14px;}
 .opt{padding:8px 12px;background:#fff;border-radius:6px;margin:6px 0;cursor:pointer;border:1px solid #dde2e9;}
@@ -59,206 +42,183 @@ padding:10px 14px;margin:8px 0;
 .right{background:#d4edda;border-color:#b2d8bc;}
 .wrong{background:#f8d7da;border-color:#e8b3b8;}
 .tip{margin-top:8px;color:#444;font-size:0.94rem;}
-
-@media(max-width:640px){
+@media(max-width:720px){
 .contrast-box{grid-template-columns:1fr;}
 h1{font-size:1.4rem;}
-.person img{width:52px;height:52px;}
 }
 </style>
 </head>
 <body>
 <div class="container">
-<h1>唯物主义 vs 唯心主义</h1>
-<div class="subtitle">哲学两大基本派别｜五大形态 概念·代表人物·经典原话</div>
+<h1>唯物主义与唯心主义 互动学习页</h1>
+<div class="subtitle">哲学两大基本派别｜五大形态 概念·代表人物·名言</div>
 
-<!-- ============ 唯物主义 ============ -->
-<div class="block-title material-title">🔵 唯物主义：物质第一性，意识第二性</div>
-
-<!-- 古代朴素 -->
-<div class="sec-card">
-<div class="sec-head mat" onclick="toggleCard(this)">
-<span>① 古代朴素唯物主义</span>
-<span class="icon-tag">＋</span>
+<div class="section-title mat-title">🔵 唯物主义：物质第一性，意识第二性</div>
+<div class="card-row">
+<!-- 古代朴素唯物主义 -->
+<div class="party-card">
+<div class="card-header mat" onclick="toggleSingleCard(this)">
+<span>古代朴素唯物主义</span>
+<span class="icon">+</span>
 </div>
-<div class="sec-body">
-<div class="sec-intro"><strong>核心：</strong>世界本原是某一种/几种具体物质（水、火、气等），直观猜测、缺少科学论证。</div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/yYi79pVsNU" alt="泰勒斯画像">
-<div class="p-info">
-<span class="p-name">泰勒斯</span>
-<span class="p-tag">古希腊哲学家 · 米利都学派</span>
-<span class="p-quote">水是万物的本原。</span>
+<div class="card-body">
+<p class="desc-text"><strong>核心：</strong>世界本原是某一种/几种具体物质形态，直观猜测，缺少科学论证。</p>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Thales_of_Miletus.jpg/300px-Thales_of_Miletus.jpg" alt="泰勒斯">
+<div class="quote-box">
+<div class="quote-name">泰勒斯</div>
+<div class="quote-sentence">「水是万物的本原。」</div>
 </div>
 </div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/34aQWnVlUQ" alt="赫拉克利特画像">
-<div class="p-info">
-<span class="p-name">赫拉克利特</span>
-<span class="p-tag">古希腊哲学家</span>
-<span class="p-quote">万物的本原是火，万物生于火又复归于火。</span>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Heraclitus_Efes.jpg/300px-Heraclitus_Efes.jpg" alt="赫拉克利特">
+<div class="quote-box">
+<div class="quote-name">赫拉克利特</div>
+<div class="quote-sentence">「火是万物的本原，万物皆流。」</div>
 </div>
 </div>
-<div class="sec-intro" style="margin-top:8px;"><strong>局限：</strong>朴素直观，把世界等同于具体实物（如中国"五行"金木水火土）。</div>
 </div>
 </div>
 
-<!-- 近代机械 -->
-<div class="sec-card">
-<div class="sec-head mat" onclick="toggleCard(this)">
-<span>② 近代机械唯物主义（形而上学）</span>
-<span class="icon-tag">＋</span>
+<!-- 近代机械唯物主义 -->
+<div class="party-card">
+<div class="card-header mat" onclick="toggleSingleCard(this)">
+<span>近代机械唯物主义（形而上学）</span>
+<span class="icon">+</span>
 </div>
-<div class="sec-body">
-<div class="sec-intro"><strong>核心：</strong>世界本原是原子；借助近代自然科学，却用机械力学看待一切事物。</div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/6cZ5p2vfCD" alt="拉美特利画像">
-<div class="p-info">
-<span class="p-name">拉美特利</span>
-<span class="p-tag">法国哲学家 · 医生</span>
-<span class="p-quote">人是机器，人的一切运动都是机械运动。</span>
-</div>
-</div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/PIZEWbOvbU" alt="霍尔巴赫画像">
-<div class="p-info">
-<span class="p-name">霍尔巴赫</span>
-<span class="p-tag">法国哲学家 · 百科全书派</span>
-<span class="p-quote">自然界是唯一的实在，一切运动都遵循机械规律。</span>
+<div class="card-body">
+<p class="desc-text"><strong>核心：</strong>认为世界本原是原子，用机械力学解释一切事物，孤立静止看待世界。</p>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Friedrich_Engels_portrait.jpg/300px-Friedrich_Engels_portrait.jpg" alt="费尔巴哈">
+<div class="quote-box">
+<div class="quote-name">费尔巴哈</div>
+<div class="quote-sentence">「自然界是唯一的存在，神是人的幻想产物。」</div>
 </div>
 </div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/x7352lIQHu" alt="费尔巴哈画像">
-<div class="p-info">
-<span class="p-name">费尔巴哈</span>
-<span class="p-tag">德国哲学家</span>
-<span class="p-quote">人本身是自然界的产物，自然界不是上帝创造的。</span>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/La_Mettrie.jpg/300px-La_Mettrie.jpg" alt="拉美特利">
+<div class="quote-box">
+<div class="quote-name">拉美特利</div>
+<div class="quote-sentence">「人是机器。」</div>
 </div>
 </div>
-<div class="sec-intro" style="margin-top:8px;"><strong>局限：</strong>机械性；形而上学（孤立、静止、片面）；历史观仍陷于唯心主义。</div>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Paul-Henri_d%27Holbach.jpg/300px-Paul-Henri_d%27Holbach.jpg" alt="霍尔巴赫">
+<div class="quote-box">
+<div class="quote-name">霍尔巴赫</div>
+<div class="quote-sentence">「宇宙中只有物质和运动。」</div>
+</div>
+</div>
 </div>
 </div>
 
-<!-- 辩证唯物 -->
-<div class="sec-card">
-<div class="sec-head mat" onclick="toggleCard(this)">
-<span>③ 辩证唯物主义（马克思主义）</span>
-<span class="icon-tag">＋</span>
+<!-- 辩证唯物主义 -->
+<div class="party-card">
+<div class="card-header mat" onclick="toggleSingleCard(this)">
+<span>辩证唯物主义（马克思主义）</span>
+<span class="icon">+</span>
 </div>
-<div class="sec-body">
-<div class="sec-intro"><strong>核心：</strong>物质是不依赖意识、又能被意识反映的客观实在；物质决定意识，意识反作用于物质；用联系、发展、矛盾的观点看世界。</div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/hbh0uAWocG" alt="卡尔·马克思画像">
-<div class="p-info">
-<span class="p-name">卡尔·马克思</span>
-<span class="p-tag">马克思主义创始人</span>
-<span class="p-quote">不是人们的意识决定人们的存在，而是人们的社会存在决定人们的意识。</span>
-</div>
-</div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/VlZqDlMiUI" alt="恩格斯画像">
-<div class="p-info">
-<span class="p-name">恩格斯</span>
-<span class="p-tag">马克思主义创始人之一</span>
-<span class="p-quote">世界的真正统一性在于它的物质性。</span>
+<div class="card-body">
+<p class="desc-text"><strong>核心：</strong>物质是不依赖于人的意识、并能为人意识所反映的客观实在；物质决定意识，意识反作用于物质。</p>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Karl_Marx_001.jpg/300px-Karl_Marx_001.jpg" alt="马克思">
+<div class="quote-box">
+<div class="quote-name">马克思</div>
+<div class="quote-sentence">「哲学家们只是用不同的方式解释世界，问题在于改变世界。」</div>
 </div>
 </div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/U5RQiBwZpK" alt="列宁画像">
-<div class="p-info">
-<span class="p-name">列宁</span>
-<span class="p-tag">马克思主义者</span>
-<span class="p-quote">物质是标志客观实在的哲学范畴，这种客观实在是人通过感觉感知的。</span>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Friedrich_Engels_portrait.jpg/300px-Friedrich_Engels_portrait.jpg" alt="恩格斯">
+<div class="quote-box">
+<div class="quote-name">恩格斯</div>
+<div class="quote-sentence">「世界的真正统一性在于它的物质性。」</div>
 </div>
 </div>
-<div class="sec-intro" style="margin-top:8px;"><strong>要点：</strong>世界统一于物质；对立统一、质量互变、否定之否定三大规律；实践是认识的来源。</div>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Lenin_1922.jpg/300px-Lenin_1922.jpg" alt="列宁">
+<div class="quote-box">
+<div class="quote-name">列宁</div>
+<div class="quote-sentence">「物质是标志客观实在的哲学范畴。」</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
-<!-- ============ 唯心主义 ============ -->
-<div class="block-title ideal-title">🔴 唯心主义：意识第一性，物质第二性</div>
-
-<!-- 主观唯心 -->
-<div class="sec-card">
-<div class="sec-head id" onclick="toggleCard(this)">
-<span>④ 主观唯心主义</span>
-<span class="icon-tag">＋</span>
+<div class="section-title ideal-title">🔴 唯心主义：意识第一性，物质第二性</div>
+<div class="card-row">
+<!-- 主观唯心主义 -->
+<div class="party-card">
+<div class="card-header ideal" onclick="toggleSingleCard(this)">
+<span>主观唯心主义</span>
+<span class="icon">+</span>
 </div>
-<div class="sec-body">
-<div class="sec-intro"><strong>核心：</strong>把<strong>人的主观精神</strong>（心、感觉、意志）当作世界本原。</div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/RvbExDmTSJ" alt="王阳明画像">
-<div class="p-info">
-<span class="p-name">王阳明</span>
-<span class="p-tag">明代心学大师</span>
-<span class="p-quote">心外无物，心外无理。</span>
+<div class="card-body">
+<p class="desc-text"><strong>核心：</strong>把人的主观精神（心灵、感觉、意志）当作世界本原。</p>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Wang_Yangming.jpg/300px-Wang_Yangming.jpg" alt="王阳明">
+<div class="quote-box">
+<div class="quote-name">王阳明</div>
+<div class="quote-sentence">「心外无物，心外无理。」</div>
 </div>
 </div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/F63QXU0Kv7" alt="贝克莱画像">
-<div class="p-info">
-<span class="p-name">贝克莱</span>
-<span class="p-tag">英国经验论哲学家</span>
-<span class="p-quote">存在就是被感知。</span>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/George_Berkeley.jpg/300px-George_Berkeley.jpg" alt="贝克莱">
+<div class="quote-box">
+<div class="quote-name">贝克莱</div>
+<div class="quote-sentence">「存在就是被感知。」</div>
 </div>
 </div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/YhzYiUntpV" alt="笛卡尔画像">
-<div class="p-info">
-<span class="p-name">笛卡尔</span>
-<span class="p-tag">法国哲学家 · 理性主义</span>
-<span class="p-quote">我思故我在。</span>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Rene_Descartes.jpg/300px-Rene_Descartes.jpg" alt="笛卡尔">
+<div class="quote-box">
+<div class="quote-name">笛卡尔</div>
+<div class="quote-sentence">「我思故我在。」</div>
 </div>
 </div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/VsxpFgZ48y" alt="孟子画像">
-<div class="p-info">
-<span class="p-name">孟子</span>
-<span class="p-tag">儒家 · 亚圣</span>
-<span class="p-quote">万物皆备于我。</span>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Mencius.jpg/300px-Mencius.jpg" alt="孟子">
+<div class="quote-box">
+<div class="quote-name">孟子</div>
+<div class="quote-sentence">「万物皆备于我矣。」</div>
 </div>
 </div>
-<div class="sec-intro" style="margin-top:8px;">简单记：<strong>万事万物由"我"的心/感觉决定</strong>。</div>
 </div>
 </div>
 
-<!-- 客观唯心 -->
-<div class="sec-card">
-<div class="sec-head id" onclick="toggleCard(this)">
-<span>⑤ 客观唯心主义</span>
-<span class="icon-tag">＋</span>
+<!-- 客观唯心主义 -->
+<div class="party-card">
+<div class="card-header ideal" onclick="toggleSingleCard(this)">
+<span>客观唯心主义</span>
+<span class="icon">+</span>
 </div>
-<div class="sec-body">
-<div class="sec-intro"><strong>核心：</strong>在人之外，存在一个<strong>客观精神</strong>作为世界本原，独立于个人而存在。</div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/ApnagdQSxp" alt="柏拉图画像">
-<div class="p-info">
-<span class="p-name">柏拉图</span>
-<span class="p-tag">古希腊哲学家</span>
-<span class="p-quote">现实世界只是理念世界的影子，理念是世界本原。</span>
-</div>
-</div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/gyiYA6K6xL" alt="黑格尔画像">
-<div class="p-info">
-<span class="p-name">黑格尔</span>
-<span class="p-tag">德国古典哲学家</span>
-<span class="p-quote">绝对精神是世界的本原，自然和社会是它的外化。</span>
+<div class="card-body">
+<p class="desc-text"><strong>核心：</strong>独立于人之外的客观精神（理、绝对精神、理念）作为世界本原。</p>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Plato_Silanion_Musei_Capitolini.jpg/300px-Plato_Silanion_Musei_Capitolini.jpg" alt="柏拉图">
+<div class="quote-box">
+<div class="quote-name">柏拉图</div>
+<div class="quote-sentence">「现实世界只是理念世界的影子。」</div>
 </div>
 </div>
-<div class="person">
-<img src="https://aka.doubaocdn.com/s/EwapLAqRNg" alt="朱熹画像">
-<div class="p-info">
-<span class="p-name">朱熹</span>
-<span class="p-tag">南宋理学家</span>
-<span class="p-quote">理在事先，理生万物。</span>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Hegel.jpg/300px-Hegel.jpg" alt="黑格尔">
+<div class="quote-box">
+<div class="quote-name">黑格尔</div>
+<div class="quote-sentence">「绝对精神是世界的本原。」</div>
 </div>
 </div>
-<div class="sec-intro" style="margin-top:8px;">简单记：<strong>人以外的精神本体（理 / 绝对精神 / 神）创造世界</strong>。</div>
+<div class="philosopher-item">
+<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Zhu_Xi.jpg/300px-Zhu_Xi.jpg" alt="朱熹">
+<div class="quote-box">
+<div class="quote-name">朱熹</div>
+<div class="quote-sentence">「理生万物，理在事先。」</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
-<!-- ============ 区别总览 ============ -->
 <div class="diff-panel">
 <h3>📊 根本区别总览：哲学基本问题 — 思维与存在何者为本原</h3>
 <div class="contrast-box">
@@ -268,7 +228,7 @@ h1{font-size:1.4rem;}
 <p>物质先存在；意识是物质的产物。</p>
 <p>分支：古代朴素｜近代机械｜辩证唯物主义</p>
 </div>
-<div class="contrast-col col-id">
+<div class="contrast-col col-ideal">
 <strong>❌ 唯心主义</strong>
 <p>本原：<strong>意识（精神）</strong></p>
 <p>意识先存在；物质来自精神。</p>
@@ -277,7 +237,7 @@ h1{font-size:1.4rem;}
 </div>
 <div style="margin-top:14px;">
 <p><strong>快速区分口诀：</strong></p>
-<ul class="diff-list">
+<ul style="padding-left:22px;margin-top:6px;">
 <li>朴素唯物：具体实物（水火金木土）</li>
 <li>机械唯物：原子、机械看待一切</li>
 <li>辩证唯物：客观物质 + 辩证法矛盾发展</li>
@@ -287,18 +247,17 @@ h1{font-size:1.4rem;}
 </div>
 </div>
 
-<!-- ============ 小练习 ============ -->
 <div class="quiz-box">
 <h3>🧩 互动小练习（点击选项判断派别）</h3>
 <div class="q-item">
-<p>题目1："心外无物"属于？</p>
+<p>题目1：“心外无物”属于？</p>
 <div class="opt" data-ans="wrong">客观唯心主义</div>
 <div class="opt" data-ans="right">主观唯心主义</div>
 <div class="opt" data-ans="wrong">古代朴素唯物主义</div>
 <div class="tip" id="q1tip"></div>
 </div>
 <div class="q-item">
-<p>题目2："理生万物，理在事先"属于？</p>
+<p>题目2：“理生万物，理在事先”属于？</p>
 <div class="opt" data-ans="right">客观唯心主义</div>
 <div class="opt" data-ans="wrong">主观唯心主义</div>
 <div class="opt" data-ans="wrong">辩证唯物主义</div>
@@ -316,27 +275,32 @@ h1{font-size:1.4rem;}
 </div>
 
 <script>
-// 折叠卡片：直接切换 display，唔用 height 过渡，避免展开空白
-function toggleCard(el){
-var body = el.nextElementSibling;
-var icon = el.querySelector(".icon-tag");
-var isOpen = body.classList.toggle("open");
-icon.innerText = isOpen ? "－" : "＋";
+// 修复：只切换当前点击嘅卡片，唔影响其他卡片
+function toggleSingleCard(headerEl){
+    const body = headerEl.nextElementSibling;
+    const icon = headerEl.querySelector(".icon");
+    body.classList.toggle("open");
+    if(body.classList.contains("open")){
+        icon.innerText = "-";
+    }else{
+        icon.innerText = "+";
+    }
 }
 
-var tipsText = {
+// 答题交互
+const tipsText = {
 q1:{right:"正确！王阳明心外无物，以人的内心为本原，主观唯心主义。",wrong:"不对，提示：这句话强调人的内心。"},
 q2:{right:"正确！朱熹的理，是人之外的客观精神，客观唯心主义。",wrong:"不对，提示：理是独立于人之外的精神。"},
 q3:{right:"正确！火是具体物质形态，古代朴素唯物主义。",wrong:"不对，提示：火是具体实物，古代朴素唯物。"}
 };
 
-document.querySelectorAll(".quiz-box .opt").forEach(function(opt){
+document.querySelectorAll(".quiz-box .opt").forEach(opt=>{
 opt.onclick=function(){
-var qWrap=this.closest(".q-item");
-var qIdx = Array.prototype.indexOf.call(qWrap.parentElement.children, qWrap);
-var qid=["q1","q2","q3"][qIdx];
-var tipDom = document.getElementById(qid+"tip");
-qWrap.querySelectorAll(".opt").forEach(function(o){o.classList.remove("right","wrong");});
+let qWrap=this.closest(".q-item");
+let qIdx = [...qWrap.parentElement.children].indexOf(qWrap);
+let qid=["q1","q2","q3"][qIdx];
+let tipDom = document.getElementById(qid+"tip");
+qWrap.querySelectorAll(".opt").forEach(o=>o.classList.remove("right","wrong"));
 if(this.dataset.ans==="right"){
 this.classList.add("right");
 tipDom.innerText = tipsText[qid].right;
@@ -344,8 +308,8 @@ tipDom.innerText = tipsText[qid].right;
 this.classList.add("wrong");
 tipDom.innerText = tipsText[qid].wrong;
 }
-};
-});
+}
+})
 </script>
 </body>
 </html>
