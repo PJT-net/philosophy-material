@@ -277,7 +277,7 @@ nav button{flex:none;}
 <div class="one" onclick="openPerson('王充')"><img src="https://aka.doubaocdn.com/s/EyRDUPgT2H" alt=""><div><div class="nm">王充</div><div class="qt">「天地合气，万物自生」</div></div><span class="detail-tip">简介 ↗</span></div>
 </div></div></div>
 </div>
-<div class="pcard mat" id="pc2">
+<div class="pcard mat open" id="pc2">
 <div class="top" onclick="toggle(this)"><span>② 近代机械唯物主义</span><span class="arrow">▼</span></div>
 <div class="body"><div class="pad">
 <p class="core"><b>核心：</b>世界本原是原子，用机械力学解释一切，孤立、静止看待世界。</p>
@@ -288,7 +288,7 @@ nav button{flex:none;}
 <div class="one" onclick="openPerson('洛克')"><img src="https://aka.doubaocdn.com/s/R5GG7VXxho" alt=""><div><div class="nm">洛克</div><div class="qt">「人的心灵像一张白纸，一切知识来自经验」</div></div><span class="detail-tip">简介 ↗</span></div>
 </div></div></div>
 </div>
-<div class="pcard mat" id="pc3">
+<div class="pcard mat open" id="pc3">
 <div class="top" onclick="toggle(this)"><span>③ 辩证唯物主义</span><span class="arrow">▼</span></div>
 <div class="body"><div class="pad">
 <p class="core"><b>核心：</b>物质是客观实在；物质决定意识、意识反作用于物质；用联系、发展、矛盾的观点看世界。</p>
@@ -719,7 +719,7 @@ setTimeout(()=>{qi2=(qi2+1)%qs.length;saveProg();renderQ();},2800);
 };
 document.getElementById('opts').appendChild(d);});
 }
-loadProg();renderQ();
+loadProg();renderQ();syncCbBtn('mat');
 </script>
 </body>
 </html>
