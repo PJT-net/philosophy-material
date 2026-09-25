@@ -194,14 +194,44 @@ nav button.on{background:linear-gradient(90deg,var(--mat),var(--mat2));color:#ff
 .ov-action button{padding:9px 16px;border:none;border-radius:30px;color:#fff;cursor:pointer;font-size:.88rem;transition:.2s;}
 .ov-action button:hover{transform:translateY(-2px);}
 footer{text-align:center;color:var(--sub);font-size:.82rem;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);letter-spacing:1px;}
+/* ===== 响应式：平板 / 手机 三档适配 ===== */
+@media(max-width:900px){
+.cmp-grid{grid-template-columns:repeat(2,1fr);}
+.cmp-col{min-width:0;}
+.cmp-wrap{grid-template-columns:1fr !important;}
+}
 @media(max-width:720px){
 .hero h1{font-size:1.7rem;}
-nav{top:8px;border-radius:22px;}
+nav{top:8px;border-radius:22px;gap:4px;padding:5px;}
+nav button{padding:8px 11px;font-size:.8rem;}
 .barcol{width:70px;}
 .phead h2{font-size:1.25rem;}
+.phead{flex-wrap:wrap;}
 .ov-head{flex-direction:column;text-align:center;}
+.ov-head img{width:84px;height:84px;}
+.ov-box{padding:20px 16px;}
 .focus{flex-direction:column;text-align:center;}
 .focus .f-btn{margin:0 auto;}
+.gallery{grid-template-columns:1fr;}
+.one{padding:10px 12px;}
+.one img{width:48px;height:48px;}
+.qcard .q{font-size:.95rem;}
+.ov-box{max-width:96vw;}
+}
+@media(max-width:480px){
+.hero h1{font-size:1.45rem;letter-spacing:1px;}
+.hero .tag{font-size:.86rem;}
+nav{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;}
+nav button{flex:none;}
+.grid{grid-template-columns:1fr;}
+.cmp-grid{grid-template-columns:1fr;}
+.filters{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.filters button{flex:none;white-space:nowrap;}
+.ctable{font-size:.8rem;}
+.ctable th,.ctable td{padding:8px;}
+.ov-quote{font-size:1rem;}
+.lbox-in{padding:16px;}
+.ov-fun{flex-direction:column;gap:6px;}
 }
 </style>
 </head>
