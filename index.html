@@ -95,7 +95,19 @@ nav button.on{background:linear-gradient(90deg,var(--mat),var(--mat2));color:#ff
 .s-r .sb{margin-left:auto;flex:none;}
 .s-empty{padding:18px;text-align:center;color:var(--sub);font-size:.9rem;}
 @media(max-width:720px){.search-box .hint{display:none;}}
+/* 头像大图 lightbox */
+.lbox{position:fixed;inset:0;z-index:110;background:rgba(4,10,24,.9);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;}
+.lbox.show{display:flex;}
+.lbox-in{position:relative;background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid #60a5fa55;border-radius:22px;padding:22px;max-width:620px;width:100%;text-align:center;animation:pop .4s ease;box-shadow:0 24px 70px #000a;}
+.lbox-close{position:absolute;top:12px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#ffffff10;color:var(--txt);font-size:1.15rem;cursor:pointer;transition:.2s;}
+.lbox-close:hover{background:#ffffff22;transform:rotate(90deg);}
+.lbox-img{width:100%;max-height:56vh;object-fit:contain;border-radius:16px;background:#00000044;}
+.lbox-cap{margin-top:14px;font-size:1.2rem;font-weight:700;letter-spacing:1px;}
+.lbox-sub{color:var(--sub);font-size:.9rem;margin-top:4px;}
+.lbox-btn{margin-top:16px;padding:10px 24px;border:none;border-radius:30px;background:linear-gradient(90deg,var(--mat),var(--mat2));color:#fff;font-weight:600;cursor:pointer;transition:.25s;}
+.lbox-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px #2563eb55;}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:16px;}
+.gallery.refresh{animation:fadeIn .4s ease;}
 .qcard{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:18px;position:relative;transition:.35s;overflow:hidden;cursor:pointer;}
 .qcard:hover{transform:translateY(-5px) rotate(-1deg);box-shadow:0 14px 34px #0007;border-color:#fbbf2466;}
 .qcard .big{position:absolute;right:8px;bottom:-14px;font-size:4.5rem;color:#ffffff0a;font-family:Georgia,serif;}
@@ -400,6 +412,17 @@ nav{top:8px;border-radius:22px;}
 <footer>🧠 哲学世界观 · 唯物 vs 唯心 · 互动探索页 · 学习参考</footer>
 </div>
 
+<!-- ===== 头像大图 lightbox ===== -->
+<div class="lbox" id="lbox" onclick="if(event.target===this)closeLbox()">
+<div class="lbox-in">
+<button class="lbox-close" onclick="closeLbox()">✕</button>
+<img class="lbox-img" id="lboxImg" src="" alt="">
+<div class="lbox-cap" id="lboxCap"></div>
+<div class="lbox-sub" id="lboxSub"></div>
+<button class="lbox-btn" id="lboxBtn" onclick="goFromLbox()">📖 查看人物简介</button>
+</div>
+</div>
+
 <!-- ===== 人物简介覆盖层 ===== -->
 <div class="overlay" id="ov" onclick="if(event.target===this)closeOv()">
 <div class="ov-box">
@@ -434,6 +457,11 @@ document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));
 const nb=document.querySelector('#nav button[data-t="'+t+'"]');if(nb)nb.classList.add('on');
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
 document.getElementById(t).classList.add('show');
+// 切页返回自动刷新：重置该页状态，避免残留
+if(t==='quote'){curF='all';document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x.dataset.f==='all'));document.getElementById('focus').classList.remove('show');renderGallery();}
+if(t==='quiz'){loadProg();renderQ();}
+if(t==='mat'){['pc1','pc2','pc3'].forEach(id=>document.getElementById(id)?.classList.toggle('open',id==='pc1'));}
+if(t==='id'){['pc4','pc5'].forEach(id=>document.getElementById(id)?.classList.toggle('open',id==='pc4'));}
 window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>switchNav(b.dataset.t));
@@ -508,6 +536,25 @@ document.body.style.overflow='hidden';
 }
 function closeOv(){document.getElementById('ov').classList.remove('show');document.body.style.overflow='';}
 
+// ===== 头像大图 lightbox =====
+let lboxName='';
+function openLbox(src,name){lboxName=name||'';
+document.getElementById('lboxImg').src=src;
+const d=name?peopleData[name]:null;
+document.getElementById('lboxCap').textContent=name||'';
+document.getElementById('lboxSub').textContent=d?d.tag+' · '+subName[d.sub]:'';
+document.getElementById('lbox').classList.add('show');document.body.style.overflow='hidden';}
+function closeLbox(){document.getElementById('lbox').classList.remove('show');document.body.style.overflow='';}
+function goFromLbox(){if(lboxName){closeLbox();openPerson(lboxName);}else closeLbox();}
+// 点任何头像 -> 打开清晰大图（捕获阶段拦截，阻止触发父级简介）
+document.addEventListener('click',e=>{
+if(e.target.tagName==='IMG'&&e.target.closest('.one,.s-r,.qcard,#focus,.ov-head')){
+e.preventDefault();e.stopPropagation();
+const src=e.target.currentSrc||e.target.src;
+const name=Object.keys(peopleData).find(k=>peopleData[k].img===src)||'';
+openLbox(src,name);
+}},true);
+
 // ===== 名言数据（含五大门派） =====
 const quotes=[
 {q:'水是万物的本原。',n:'泰勒斯',sub:'p1',img:'https://aka.doubaocdn.com/s/yYi79pVsNU'},
@@ -549,7 +596,13 @@ g.innerHTML+='<div class="qcard" onclick="focusPerson(\''+q.n+'\')"><span class=
 }
 document.querySelectorAll('#filters button').forEach(b=>b.onclick=()=>{
 document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-curF=b.dataset.f;renderGallery();
+curF=b.dataset.f;
+// 切换门派 -> 刷新画廊：收起聚焦条、清空重渲染、轻微刷新动画
+document.getElementById('focus').classList.remove('show');
+const g=document.getElementById('gallery');
+g.classList.remove('refresh');void g.offsetWidth;g.classList.add('refresh');
+renderGallery();
+g.scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 // 名言 → 人物（聚焦条）
 function focusPerson(name){
@@ -580,6 +633,10 @@ const qs=[
 {q:'“万物由原子构成”是哪位哲学家？',a:['德谟克利特','泰勒斯','柏拉图'],c:0,e:'德谟克利特提出原子论，属古代朴素唯物主义。'}
 ];
 let qi2=0,score=0,answered=false;
+// ===== 测验进度记忆 =====
+const SAVE_KEY='philo_quiz_v1';
+function saveProg(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({qi2,score}));}catch(e){}}
+function loadProg(){try{const s=localStorage.getItem(SAVE_KEY);if(s){const d=JSON.parse(s);qi2=d.qi2||0;score=d.score||0;}}catch(e){}}
 function renderQ(){
 const it=qs[qi2];
 document.getElementById('qst').textContent=it.q;
@@ -588,6 +645,8 @@ document.getElementById('exp').style.display='none';
 answered=false;
 document.getElementById('pi').textContent=qi2+1;
 document.getElementById('ptot').textContent=qs.length;
+document.getElementById('score').textContent=score;
+document.getElementById('sbar').style.width=(score/qs.length*100)+'%';
 it.a.forEach((op,i)=>{
 const d=document.createElement('div');d.className='opt';d.textContent=op;
 d.onclick=()=>{if(answered)return;answered=true;
@@ -596,11 +655,12 @@ if(i===it.c){d.classList.add('right');score++;}else{d.classList.add('wrong');doc
 document.getElementById('exp').innerHTML='<b>解析：</b>'+it.e;document.getElementById('exp').style.display='block';
 document.getElementById('score').textContent=score;
 document.getElementById('sbar').style.width=(score/qs.length*100)+'%';
-setTimeout(()=>{qi2=(qi2+1)%qs.length;renderQ();},2800);
+saveProg();
+setTimeout(()=>{qi2=(qi2+1)%qs.length;saveProg();renderQ();},2800);
 };
 document.getElementById('opts').appendChild(d);});
 }
-renderQ();
+loadProg();renderQ();
 </script>
 </body>
 </html>
